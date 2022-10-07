@@ -51,7 +51,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val getPlace = intent.getParcelableExtra<Place>(SELECTED_PLACE)
 
 
+
         if(getPlace != null) {
+            supportActionBar?.title = getPlace.name;
             val place = LatLng(getPlace.lat.toDouble(), getPlace.lon.toDouble())
             mMap.addMarker(MarkerOptions().position(place).title(getPlace.name))
             mMap.moveCamera(CameraUpdateFactory.newLatLng(place))
