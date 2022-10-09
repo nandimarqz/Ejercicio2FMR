@@ -6,6 +6,7 @@ import android.os.Bundle
 import com.ejercicio3fmr.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+    //Lista que contiene los lugares que aparecen en el recyclerView
     val list = listOf<Place>(Place("https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Angkor_Wat.jpg/1200px-Angkor_Wat.jpg", "Angkor Wat", "13.4125", "103.86666666667"),
         Place("https://cnnespanol.cnn.com/wp-content/uploads/2021/06/Gran-barrera-coral.jpeg?quality=100&strip=info", "Barrera de coral", "-18.2870668", "147.6991918"),
         Place("https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Before_Machu_Picchu.jpg/640px-Before_Machu_Picchu.jpg", "Machu Picchu" , "-13.1631412", " -72.5449629"),
@@ -18,15 +19,19 @@ class MainActivity : AppCompatActivity() {
     )
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //Infla el layout y lo guarda en una variable
         val binding = ActivityMainBinding.inflate(layoutInflater)
+        //Muestra el layout
         setContentView(binding.root)
-
+        //Asocia el adapter al recycler y le pasa la lista y una funcion por parametro
+        //(que se llamara en el onBindViewHolder cuando se clicke sobre una persona)
         binding.recycler.adapter = PlaceAdapter(list){ place ->
 
+            //Guarda el intent en una variable, este intent hace de "puente" entre este activity y el mapsActivity
             val intent = Intent(this@MainActivity, MapsActivity::class.java)
-
+            //Pasa el lugar al MapsActivity
             intent.putExtra(MapsActivity.SELECTED_PLACE, place)
-
+            //Inicia el Activity que lo tiene guardado en la variable intent
             startActivity(intent)
 
         }
