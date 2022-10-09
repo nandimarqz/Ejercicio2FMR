@@ -19,10 +19,13 @@ class MainActivity : AppCompatActivity() {
     )
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         //Infla el layout y lo guarda en una variable
         val binding = ActivityMainBinding.inflate(layoutInflater)
+
         //Muestra el layout
         setContentView(binding.root)
+
         //Asocia el adapter al recycler y le pasa la lista y una funcion por parametro
         //(que se llamara en el onBindViewHolder cuando se clicke sobre una persona)
         binding.recycler.adapter = PlaceAdapter(list){ place ->
